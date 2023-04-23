@@ -329,3 +329,9 @@ body {
     width: 32px;
     height: 32px;
 }
+
+.text input {
+    font-size: 18px;
+    width: 128px;
+    height: auto;
+}

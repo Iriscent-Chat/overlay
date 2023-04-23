@@ -27,8 +27,6 @@ function load(username, auth, settings) {
           
             var clone = template.content.cloneNode(true);
             var div = clone.children[0];
-            
-            console.log(settings);
 
             if(settings.showBadges) {
                 var badges = emoteParser.getBadges(userstate, channel);
@@ -37,7 +35,6 @@ function load(username, auth, settings) {
                     const badgeElement = div.children[0];
                     let badge = badges[ind];
                     badgeElement.innerHTML += `<img src="${badge.img}" alt-"${badge.info}">`;
-                    console.log(badgeElement);
                 }
             }
 
@@ -46,8 +43,8 @@ function load(username, auth, settings) {
     
             name.innerText = userstate["display-name"];
             text.innerHTML = emoteParser.replaceEmotes(message, userstate, channel, self);
-    
-            name.style.color = "#8A2BE2";
+
+            name.style.color = userstate["color"];
     
             chat.insertBefore(clone, chat.children[0]);
         } else {
@@ -60,7 +57,7 @@ async function init() {
     console.info("Loaded")
     UserData = JSON.parse(localStorage.getItem("UserData"));
     ChatSettings = await window.electronAPI.getChatSettings();
-    load(UserData["login"], localStorage.getItem("TwitchOAuth"), ChatSettings);
+    load(ChatSettings.username ? ChatSettings.username : UserData["login"], localStorage.getItem("TwitchOAuth"), ChatSettings);
 };
 
 init();

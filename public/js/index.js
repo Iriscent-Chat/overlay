@@ -55,6 +55,21 @@ async function onLoadHandler() {
             console.info("Username: " + UserData["display_name"]);
             document.getElementById("userName").innerText = UserData["display_name"];
 
+            let chatSettings = localStorage.getItem("ChatSettings");
+            if(chatSettings != null) {
+                const namedElements = document.querySelectorAll('input[name]');
+                namedElements[0].value = chatSettings.fontColor;
+                namedElements[1].value = chatSettings.bgColor;
+                namedElements[2].checked = chatSettings.showBadges;
+                namedElements[3].checked = chatSettings.emoteSources["7tv"];
+                namedElements[4].checked = chatSettings.emoteSources["btv"];
+                namedElements[5].checked = chatSettings.emoteSources["ffz"];
+                namedElements[6].checked = chatSettings.enableServer;
+                namedElements[7].value = chatSettings.fontSize;
+                namedElements[8].value = chatSettings.username;
+                namedElements[9].checked = chatSettings.topMost;
+            }
+
             finishLoading();
             clearInterval(dotInterval);
             loading = false;
@@ -77,6 +92,21 @@ async function onLoadHandler() {
 
             console.info("Username: " + UserData["display_name"]);
             document.getElementById("userName").children[0].innerText = `Welcome, ${UserData["display_name"]}!`;
+
+            let chatSettings = JSON.parse(localStorage.getItem("ChatSettings"));
+            if(chatSettings != null) {
+                const namedElements = document.querySelectorAll('input[name]');
+                namedElements[0].value = chatSettings.fontColor;
+                namedElements[1].value = chatSettings.bgColor;
+                namedElements[2].checked = chatSettings.showBadges;
+                namedElements[3].checked = chatSettings.emoteSources["7tv"];
+                namedElements[4].checked = chatSettings.emoteSources["btv"];
+                namedElements[5].checked = chatSettings.emoteSources["ffz"];
+                namedElements[6].checked = chatSettings.enableServer;
+                namedElements[7].value = chatSettings.fontSize;
+                namedElements[8].value = chatSettings.username;
+                namedElements[9].checked = chatSettings.topMost;
+            }
 
             finishLoading();
             clearInterval(dotInterval);
@@ -148,8 +178,11 @@ async function finishLoading() {
             },
             "enableServer": namedElements[6].checked,
             "fontSize": namedElements[7].value,
-            "topMost": namedElements[8].checked
+            "username": namedElements[8].value,
+            "topMost": namedElements[9].checked
         }
         window.electronAPI.launchChat(JSON.stringify(settings));
+
+        localStorage.setItem("ChatSettings", JSON.stringify(settings));
     });
 }
