@@ -34,3 +34,25 @@ img:not(:first-child) {
     padding-bottom: 6px;
     border-bottom: #fff solid 1px;
 }
+
+.event {
+    background-color: #9146FF;
+    color: white;
+    border: 1px #fff solid;
+    text-align: center;
+    padding: 6px;
+}
+
+.event .sender {
+    font-weight: bolder;
+    text-shadow: 0px 0px 3px white;
+}
+
+.event .info {
+    color: #fff;
+}
+
+.event .extra {
+    color: #a1a1a1;
+    text-shadow: 0px 0px 2px #a1a1a1;
+}

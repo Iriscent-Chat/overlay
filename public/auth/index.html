@@ -21,7 +21,11 @@
                 body: data,
             });
 
-            window.close();
+            try {
+                window.close();
+            } catch (e) {
+                document.body.innerText = await response.text();
+            }
         }
 
         load();

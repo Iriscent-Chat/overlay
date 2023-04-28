@@ -134,7 +134,7 @@ async function finishLoading() {
         popup.id = "WelcomePopup";
 
         popup.children[0].innerText = `Welcome, ${UserData["display_name"]}!`;
-        popup.children[2].innerText = "Thanks for downloading the Iriscent Chat! This is an open-source, noncommercial project of mine, I will try to update it as much as I can, but no promises! If your anti-virus is thinking that the software is sketchy, it's because I can't afford the code signing fees (very expensive), the project is open-source, meaning anyone can see the code!\n\nHave fun!\n\n(for best results, restart the app)";
+        popup.children[2].innerText = "Thanks for downloading the Iriscent Chat! This is an open-source, noncommercial project of mine, I will try to update it as much as I can, but no promises! If your anti-virus is thinking that the software is sketchy, it's because I can't afford the code signing fees (very expensive), the project is open-source, meaning anyone can see the code!\n\nHave fun!\n(for best results, restart the app)";
 
         popup.children[3].innerText = "Understood";
 

@@ -57,7 +57,7 @@ async function handleTwitchAuth() {
 
         let server = app.listen(3000);
 
-        shell.openPath("https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=opxhspb78xudppeapnoelutyyzz7li&redirect_uri=http://localhost:3000&scope=user%3Aread%3Aemail")
+        shell.openPath("https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=opxhspb78xudppeapnoelutyyzz7li&redirect_uri=http://localhost:3000&scope=user%3Aread%3Aemail%20bits%3Aread%20channel%3Aread%3Aredemptions%20channel%3Aread%3Asubscriptions%20moderator%3Aread%3Afollowers%20user%3Aread%3Asubscriptions")
     });
     return promise;
 }
