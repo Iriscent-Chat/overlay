@@ -15,7 +15,7 @@ const createWindow = () => {
     });
 
     win.setResizable(false);
-    win.setMenu(null);
+    // win.setMenu(null);
   
     win.loadFile('public/index.html');
 }
@@ -26,6 +26,8 @@ app.whenReady().then(() => {
     ipcMain.handle('exit', handleExit);
     ipcMain.on('launch-chat', handleLaunch);
     ipcMain.handle('get-chat-settings', (event) => chatSettings);
+    ipcMain.handle('ask-logout', handleLogout);
+    ipcMain.handle('force-quit', forceQuit);
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -93,4 +95,18 @@ function handleLaunch(event, args) {
     chatWindow.on('close', () => {
         delete chatWindow;
     });
+}
+
+function handleLogout() {
+    let num = dialog.showMessageBoxSync({
+        message: "Are you sure you want to exit and logout from the app?",
+        type: "question",
+        buttons: ["Yes", "No"],
+        title: "Logout?"
+    });
+    return num;
+}
+
+async function forceQuit() {
+    app.quit();
 }

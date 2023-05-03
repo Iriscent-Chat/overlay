@@ -166,7 +166,7 @@ body {
     border-radius: 7.5%;
     padding: 12px;
     width: 35vw;
-    height: 47.5vh;
+    height: 50vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -230,14 +230,36 @@ body {
     padding: 4px;
     display: inline;
     vertical-align: middle;
+    float: right;
+}
+
+.navusername {
+    margin-top: 50%;
 }
 
 .nav #userName {
     float: right;
+    vertical-align: middle;
+    margin-top: 12px;
+    margin-right: 8px;
     color: white;
     border-left: 2px solid white;
     padding-left: 12px;
     height: 100%;
+}
+
+#logout {
+    vertical-align: middle;
+    margin-right: 12px;
+    margin-top: -8px;
+    float: right;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    background-color: #313131;
+    padding: 6px;
+    border-radius: 10px;
 }
 
 .settings-sel {

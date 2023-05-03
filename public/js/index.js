@@ -49,11 +49,13 @@ async function onLoadHandler() {
 
             UserData = JSON.parse(localStorage.getItem("UserData"));
             
+            UserData = JSON.parse(localStorage.getItem("UserData"));
+            
             console.info("User Profile Image URL: " + UserData["profile_image_url"]);
             document.getElementById("userAvatar").src = UserData["profile_image_url"];
 
             console.info("Username: " + UserData["display_name"]);
-            document.getElementById("userName").innerText = UserData["display_name"];
+            document.getElementById("userName").innerText = `Welcome, ${UserData["display_name"]}!`;
 
             let chatSettings = localStorage.getItem("ChatSettings");
             if(chatSettings != null) {
@@ -91,7 +93,7 @@ async function onLoadHandler() {
             document.getElementById("userAvatar").src = UserData["profile_image_url"];
 
             console.info("Username: " + UserData["display_name"]);
-            document.getElementById("userName").children[0].innerText = `Welcome, ${UserData["display_name"]}!`;
+            document.getElementById("userName").innerText = `Welcome, ${UserData["display_name"]}!`;
 
             let chatSettings = JSON.parse(localStorage.getItem("ChatSettings"));
             if(chatSettings != null) {
@@ -153,6 +155,7 @@ async function finishLoading() {
 
     const launchbutton = document.getElementById("launch");
     const exitbutton = document.getElementById("exit");
+    const logoutbutton = document.getElementById("logout");
 
     const fontsizevalue = document.getElementById("font-size-value");
     const fontsizeinput = document.getElementById("input-font-size");
@@ -184,5 +187,14 @@ async function finishLoading() {
         window.electronAPI.launchChat(JSON.stringify(settings));
 
         localStorage.setItem("ChatSettings", JSON.stringify(settings));
+    });
+
+    logoutbutton.addEventListener("click", async () => {
+        let ans = await window.electronAPI.askLogout();
+        if (ans === 0) {
+            localStorage.removeItem("TwitchOAuth");
+            localStorage.removeItem("UserData");
+            window.electronAPI.forceQuit();
+        }
     });
 }
