@@ -104,10 +104,9 @@ async function onLoadHandler() {
                 namedElements[3].checked = chatSettings.emoteSources["7tv"];
                 namedElements[4].checked = chatSettings.emoteSources["btv"];
                 namedElements[5].checked = chatSettings.emoteSources["ffz"];
-                namedElements[6].checked = chatSettings.enableServer;
-                namedElements[7].value = chatSettings.fontSize;
-                namedElements[8].value = chatSettings.username;
-                namedElements[9].checked = chatSettings.topMost;
+                namedElements[6].value = chatSettings.fontSize;
+                namedElements[7].value = chatSettings.username;
+                namedElements[8].checked = chatSettings.topMost;
             }
 
             finishLoading();
@@ -179,10 +178,9 @@ async function finishLoading() {
                 "btv": namedElements[4].checked,
                 "ffz": namedElements[5].checked
             },
-            "enableServer": namedElements[6].checked,
-            "fontSize": namedElements[7].value,
-            "username": namedElements[8].value,
-            "topMost": namedElements[9].checked
+            "fontSize": namedElements[6].value,
+            "username": namedElements[7].value,
+            "topMost": namedElements[8].checked
         }
         window.electronAPI.launchChat(JSON.stringify(settings));
 
