@@ -15,7 +15,7 @@ const createWindow = () => {
     });
 
     win.setResizable(false);
-    // win.setMenu(null);
+    win.setMenu(null);
   
     win.loadFile('public/index.html');
 }

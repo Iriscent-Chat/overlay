@@ -69,6 +69,63 @@ class EventSub {
                     }
                 })
             });
+            fetch('https://api.twitch.tv/helix/eventsub/subscriptions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${auth}`,
+                    'Client-Id': 'opxhspb78xudppeapnoelutyyzz7li',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'type': 'channel.subscription.gift',
+                    'version': '1',
+                    'condition': {
+                        'broadcaster_user_id': userId
+                    },
+                    'transport': {
+                        'method': 'websocket',
+                        'session_id': this.sessionId
+                    }
+                })
+            });
+            fetch('https://api.twitch.tv/helix/eventsub/subscriptions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${auth}`,
+                    'Client-Id': 'opxhspb78xudppeapnoelutyyzz7li',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'type': 'channel.subscription.message',
+                    'version': '1',
+                    'condition': {
+                        'broadcaster_user_id': userId
+                    },
+                    'transport': {
+                        'method': 'websocket',
+                        'session_id': this.sessionId
+                    }
+                })
+            });
+            fetch('https://api.twitch.tv/helix/eventsub/subscriptions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${auth}`,
+                    'Client-Id': 'opxhspb78xudppeapnoelutyyzz7li',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'type': 'channel.cheer',
+                    'version': '1',
+                    'condition': {
+                        'broadcaster_user_id': userId
+                    },
+                    'transport': {
+                        'method': 'websocket',
+                        'session_id': this.sessionId
+                    }
+                })
+            });
         }
 
         if(Object.keys(data?.payload).length < 2) return;
@@ -95,6 +152,32 @@ class EventSub {
                     if(data.payload.event.user_input) {
                         extra.innerText = data.payload.event.user_input;
                     }
+                    break;
+                case "channel.subscription.gift":
+                    sender.innerText = data.payload.event.user_name;
+                    info.innerHTML = " gifted <span class='sender'>" + data.payload.event.total + "</span>" + " tier " + data.payload.event.tier + " subs to the community!";
+                    if(data.payload.event.cumulative_total) {
+                        extra.innerHTML += `${data.payload.event.cumulative_total} total gifted!`;
+                    }
+                    break;
+                case "channel.subscription.message":
+                    sender.innerText = data.payload.event.user_name;
+                    info.innerHTML = " resubbed for " + data.payload.event.duration_months + " months!";
+                    if(data.payload.event.streak_months) {
+                        info.innerHTML += "\n" + data.payload.event.streak_months + " months in a row!"
+                    }
+                    if(data.payload.event.message.text) {
+                        extra.innerHTML = data.payload.event.message.text;
+                    }
+                    break;
+                case "channel.cheer":
+                    if(data.payload.event.is_anonymous) {
+                        sender.innerText = "An anonymous person";
+                    } else {
+                        sender.innerText = data.payload.event.user_name;
+                    }
+                    info.innerHTML = " just sent " + data.payload.event.bits + " bits!";
+                    extra.innerHTML = data.payload.event.message;
                     break;
                 default:
                     break;

@@ -4,4 +4,32 @@
 
 [![Latest Release](https://release-badges-generator.vercel.app/api/releases.svg?user=felixfromdiscord&repo=iriscent-chat-overlay&gradient=4259f7,8bfaec)](https://github.com/felixfromdiscord/iriscent-chat-overlay/releases)
 
-good readme soon
+## Screenshots
+
+> Chat Comparison ![Chat Comparison](https://felix.is-a-useless.engineer/62lvjy_CZ.gif)
+---
+> Main Menu ![Main Menu](https://felix.is-a-useless.engineer/62lv_9IVu.png)
+
+## Features
+
+- Emote Support (7TV, BetterTTV, FrankerFaceZ)
+- Events in chat (Follows, Gifted Subs, Bits etc.)
+- Badges
+- Customizable
+- Open Source
+- Top Most window mode (i mean this is pretty much the point of it but i mean it is a feature soooo)
+- Somewhat frequent updates :) (no autoupdater tho 😭)
+
+## Contributing
+
+man idk why anybody would want to but like just do whatever you want like srsly i don't care enough
+
+## Building
+
+nah dont even try 💀
+
+## Credits
+
+[BattlePrizrak](https://twitch.tv/battleprizrak) - helped in event support testing :)  
+[balkticu](https://twitch.tv/balkticu) - idk why this man is here dont even ask  
+[me](https://twitch.tv/felixfromdiscord) - i mean i created this thing btw pls follow my twitch i will stream soon i promise :(
