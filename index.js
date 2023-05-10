@@ -15,7 +15,6 @@ const createWindow = () => {
     });
 
     win.setResizable(false);
-    // win.setMenu(null);
   
     win.loadFile('public/index.html');
 }
@@ -90,7 +89,6 @@ function handleLaunch(event, args) {
         frame: false
     });
 
-    chatWindow.setMenu(null);
     chatWindow.loadFile("public/widget.html");
     chatWindow.setAlwaysOnTop(chatSettings.topMost);
 
