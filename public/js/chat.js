@@ -205,7 +205,12 @@ class EventSub {
 function load(username, auth, settings) {
     const chat = document.getElementById("chat");
 
-    chat.style.backgroundColor = settings.bgColor;
+
+    if(settings.transparentWindow) {
+        document.body.style.backgroundColor = "transparent";
+    } else {
+        chat.style.backgroundColor = settings.bgColor;
+    }
     
     chat.style.color = settings.fontColor;
     document.body.style.fontSize = settings.fontSize + "px";

@@ -15,7 +15,7 @@ const createWindow = () => {
     });
 
     win.setResizable(false);
-    win.setMenu(null);
+    // win.setMenu(null);
   
     win.loadFile('public/index.html');
 }
@@ -85,7 +85,9 @@ function handleLaunch(event, args) {
         height: 425,
         webPreferences: {
             preload: path.join(__dirname, 'chatpreload.js')
-        }
+        },
+        transparent: settings.transparentWindow,
+        frame: false
     });
 
     chatWindow.setMenu(null);

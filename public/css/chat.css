@@ -7,6 +7,36 @@ body {
     font-size: 24px;
     background-color: #00000000;
     overflow: hidden;
+    overflow-y: visible;
+    border-left: 1px solid black;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #212121;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.nav {
+    background-color: black;
+    width: 100vw;
+    height: 24px;
+    -webkit-app-region: drag;
+    position: fixed;
+    color: white;
+    user-select: none;
+    cursor: default;
+    padding: 4px;
 }
 
 img {
@@ -27,12 +57,17 @@ img:not(:first-child) {
     padding: 6px;
     display: block;
     height: 100vh;
+    background-color: #0000002a;
 }
 
 .message {
     margin-top: 4px;
     padding-bottom: 6px;
     border-bottom: #fff solid 1px;
+}
+
+.message:first-child {
+    margin-top: 26px;
 }
 
 .event {
