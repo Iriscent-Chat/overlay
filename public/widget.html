@@ -11,7 +11,10 @@
     <title>Chat</title>
 </head>
 <body>
-    <div class="nav">Chat</div>
+    <div class="nav">
+        <span>Chat</span>
+        <span id="frameclose">x</span>
+    </div>
     <div id="chat" class="chat">
         <template id="message">
             <div class="message">
@@ -29,5 +32,23 @@
             </div>
         </template>
     </div>
+
+    <style>
+        #frameclose {
+            background-color: rgb(255, 17, 17);
+            height: 14px;
+            width: 14px;
+            border-radius: 100%;
+            float: right;
+            margin: 2px;
+            cursor: pointer;
+            position: relative;
+            z-index: 9999;
+            -webkit-app-region: no-drag;
+            text-align: center;
+            font-size: 12px;
+            margin-right: 18px;
+        }
+    </style>
 </body>
 </html>

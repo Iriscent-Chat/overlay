@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
 const Express = require("express");
 var bodyParser = require('body-parser');
+const client = require('discord-rich-presence')('887438640370819122');
 
 var chatSettings;
 
@@ -11,12 +12,18 @@ const createWindow = () => {
         height: 720,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
-        }
+        },
+        frame: false,
+        icon: "./favicon.png"
     });
 
     win.setResizable(false);
   
     win.loadFile('public/index.html');
+    
+    ipcMain.handle('minimize', () => {
+        win.minimize();
+    });
 }
 
 app.whenReady().then(() => {
@@ -24,9 +31,10 @@ app.whenReady().then(() => {
     ipcMain.handle('do-auth', handleTwitchAuth);
     ipcMain.handle('exit', handleExit);
     ipcMain.on('launch-chat', handleLaunch);
-    ipcMain.handle('get-chat-settings', (event) => chatSettings);
+    ipcMain.handle('get-chat-settings', () => chatSettings);
     ipcMain.handle('ask-logout', handleLogout);
     ipcMain.handle('force-quit', forceQuit);
+    ipcMain.handle('update-rpc', (event, options) => handleUpdateRPC(options));
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -64,13 +72,12 @@ async function handleTwitchAuth() {
 }
 
 function handleExit() {
-    let num = dialog.showMessageBoxSync({
+    if (dialog.showMessageBoxSync({
         message: "Are you sure you want to exit the app?",
         type: "question",
         buttons: ["Yes", "No"],
         title: "Exit?"
-    });
-    if (num == 0) {
+    }) == 0) {
         app.quit();
     }
 }
@@ -97,16 +104,24 @@ function handleLaunch(event, args) {
     });
 }
 
-function handleLogout() {
-    let num = dialog.showMessageBoxSync({
+const handleLogout = () => dialog.showMessageBoxSync({
         message: "Are you sure you want to exit and logout from the app?",
         type: "question",
         buttons: ["Yes", "No"],
         title: "Logout?"
-    });
-    return num;
+});
+
+function forceQuit() {
+    app.quit();
 }
 
-async function forceQuit() {
-    app.quit();
+function handleUpdateRPC(options) {
+    try {
+        client.updatePresence(JSON.parse(options));
+    } catch (e) {
+        console.error(e);
+        return e;
+    }
+    
+    return true;
 }

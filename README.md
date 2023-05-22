@@ -1,8 +1,8 @@
 # Iriscent Chat Overlay
 
-![Built With Electron.js](https://img.shields.io/badge/Built%20With%20Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)
-
-[![Latest Release](https://release-badges-generator.vercel.app/api/releases.svg?user=felixfromdiscord&repo=iriscent-chat-overlay&gradient=4259f7,8bfaec)](https://github.com/felixfromdiscord/iriscent-chat-overlay/releases)
+![Built With Electron](https://img.shields.io/badge/Built%20With%20Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)
+[![Discord](https://dcbadge.vercel.app/api/server/GHMVBbxm7N)](https://discord.gg/GHMVBbxm7N)  
+[![Latest Release](https://release-badges-generator.vercel.app/api/releases.svg?user=felixfromdiscord&repo=iriscent-chat-overlay&gradient=4259f7,8bfaec)](https://github.com/felixfromdiscord/iriscent-chat-overlay/releases)  
 
 ## Screenshots
 
@@ -21,6 +21,8 @@
 - Open Source
 - Top Most window mode (i mean this is pretty much the point of it but i mean it is a feature soooo)
 - Somewhat frequent updates :) (no autoupdater tho 😭)
+- Transparent window support
+- `Custom Plugins and Styles support (SOON)`
 
 ## Contributing
 
@@ -33,6 +35,6 @@ nah dont even try 💀
 ## Credits
 
 [BattlePrizrak](https://twitch.tv/battleprizrak) - helped in event support testing :)  
-[balkticu](https://twitch.tv/balkticu) - idk why this man is here dont even ask  
+[balkticu](https://twitch.tv/balkticu) - idk why this man is here dont even ask, i guess emotional support or something  
 [me](https://twitch.tv/felixfromdiscord) - i mean i created this thing btw pls follow my twitch i will stream soon i promise :(
 [(king)kaizen](https://twitch.tv/king_kaizen_) - emotional support :)

@@ -11,6 +11,11 @@ body {
     border-left: 1px solid black;
 }
 
+* {
+    user-select: none;
+    cursor: default;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }

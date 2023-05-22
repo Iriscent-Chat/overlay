@@ -22,10 +22,15 @@
         <div id="particles"></div>
     </div>
 
+    <div class="frame">
+        <span id="frameclose">x</span>
+        <span id="frameminimize">-</span>
+    </div>
+
     <div id="app">
         <div class="nav">
             <span class="navbrandname">
-                Iriscent Chat
+                Iriscent <span style="color: white;">Chat Overlay</span>
             </span>
             <span class="navusername">
                 <img src="https://placehold.co/48x48" alt="User Avatar" id="userAvatar">
@@ -40,46 +45,62 @@
             </span>
         </div>
 
-        <div class="settings-sel">
+        <div class="app-options">
             <box-icon name='play-circle' color='lime' id="launch"></box-icon>
             <box-icon name='exit' color='red' id="exit"></box-icon>
         </div>
 
         <div class="settings">
-            <div class="input color">
-                <label for="input-text-color">Text Color</label>
-                <input type="color" name="text-color" id="input-text-color" value="#ffffff">
-            </div>
-            <div class="input color">
-                <label for="input-text-color">Background Color</label>
-                <input type="color" name="bg-color" id="input-bg-color" value="#000000">
-            </div>
-            <div class="input check">
-                <label for="input-show-badges">Show Badges</label>
-                <input type="checkbox" name="show-badges" id="input-show-badges" checked>
-            </div>
-            <div class="input checks">
-                <span></span> <span>Emote Sources</span> <span></span>
-                <label for="emote-src-stv">7TV</label><label for="emote-src-bttv">BTV</label><label for="emote-src-ffz">FFZ</label>
-                <input type="checkbox" name="emote-src-stv" id="emote-src-stv" checked> <input type="checkbox" name="emote-src-btv" id="emote-src-btv" checked> <input type="checkbox" name="emote-src-ffz" id="emote-src-ffz" checked>
-            </div>
-            <div class="input range">
-                <label for="input-font-size">Font Size</label>
-                <input type="range" name="font-size" id="input-font-size" value="12" min="12" max="24">
-                <span id="font-size-value">Font Size: 12</span>
-            </div>
-            <div class="input text">
-                <label for="input-top-most">Channel to read chat from (Leave empty for your own)</label>
-                <input type="text" name="user-chat" id="input-user-chat">
-            </div>
-            <div class="input check">
-                <label for="input-trasparent-window">Transparent Window (Experimental)</label>
-                <input type="checkbox" name="transparent-window" id="input-transparent-window" checked>
-            </div>
-            <div class="input check">
-                <label for="input-top-most">Top Most Window (Placed on top of other windows)</label>
-                <input type="checkbox" name="top-most" id="input-top-most" checked>
-            </div>
+            <ul>
+                <li>
+                    <label for="input-text-color">Text Color</label>
+                    <input type="color" name="text-color" id="input-text-color" value="#ffffff">
+                </li>
+                <li>
+                    <label for="input-bg-color">Background Color</label>
+                    <input type="color" name="bg-color" id="input-bg-color" value="#000000">
+                </li>
+                <li>
+                    <label for="input-show-badges">Show Badges? (Subscriber, Moderator, etc...)</label>
+                    <input type="checkbox" name="show-badges" id="input-show-badges" checked>
+                </li>
+                <li>
+                    <label>Emote Sources</label>
+                    <div class="multiple-inputs">
+                        <div>
+                            <label for="emote-src-stv">7TV</label>
+                            <br>
+                            <input type="checkbox" name="emote-src-stv" id="emote-src-stv" checked>
+                        </div>
+                        <div>
+                            <label for="emote-src-btv">BTV</label>
+                            <br>
+                            <input type="checkbox" name="emote-src-btv" id="emote-src-btv" checked>
+                        </div>
+                        <div>
+                            <label for="emote-src-ffz">FFZ</label>
+                            <br>
+                            <input type="checkbox" name="emote-src-ffz" id="emote-src-ffz" checked>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <label for="input-font-size" id="font-size-value">Font Size: 12</label>
+                    <input type="range" name="font-size" id="input-font-size" value="12" min="12" max="24">
+                </li>
+                <li>
+                    <label for="input-user-chat">Chat Channel</label>
+                    <input type="text" name="user-chat" id="input-user-chat">
+                </li>
+                <li>
+                    <label for="input-transparent-window">Transparent Window (Experimental!)</label>
+                    <input type="checkbox" name="transparent-window" id="input-transparent-window">
+                </li>
+                <li>
+                    <label for="input-top-most">Top Most Window</label>
+                    <input type="checkbox" name="top-most" id="input-top-most" checked>
+                </li>
+            </ul>
         </div>
     </div>
 
