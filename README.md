@@ -1,4 +1,4 @@
-# ![Logo](favicon.png)
+# ![Logo](logo.png)
 
 ![Built With Electron](https://img.shields.io/badge/Built%20With%20Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)
 [![Discord](https://dcbadge.vercel.app/api/server/GHMVBbxm7N)](https://discord.gg/GHMVBbxm7N)  
