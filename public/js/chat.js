@@ -16,6 +16,12 @@ class EventSub {
         this.socket.onerror = this.onerror;
     }
 
+    close = function() {
+        this.socket.close();
+
+        delete this;
+    }
+
     onopen = function(e) {
         console.info("[open] EventSub WebSocket connection estabilished!");
     };
@@ -205,9 +211,8 @@ class EventSub {
 function load(username, auth, settings) {
     const chat = document.getElementById("chat");
 
-
     if(settings.transparentWindow) {
-        document.body.style.backgroundColor = "transparent";
+        document.body.style.backgroundColor = settings.bgColor + "2a";
     } else {
         chat.style.backgroundColor = settings.bgColor;
     }
@@ -265,7 +270,6 @@ function load(username, auth, settings) {
 }
 
 async function init() {
-    console.info("Loaded")
     ChatSettings = await window.electronAPI.getChatSettings();
     load(ChatSettings.username ? ChatSettings.username : UserData["login"], localStorage.getItem("TwitchOAuth"), ChatSettings);
 };
@@ -276,12 +280,31 @@ init();
 
 document.addEventListener("keydown", (event) => {
     const keyName = event.key;
-  
+
     if (keyName === "Control") {
         return;
     }
-  
+
     if (event.ctrlKey && keyName === "r") {
         window.location.reload();
     }
 }, false);
+
+document.getElementById("frameclose").addEventListener('click', (e) => {
+    ES.close();
+
+    window.electronAPI.updateRPC(JSON.stringify({
+        details: 'In main menu...',
+        state: 'Setting up stuff...',
+        largeImageKey: 'logo',
+        largeImageText: 'v1.0.0-beta',
+        startTimestamp: Date.now(),
+        buttons: [
+            { label: "Check out my Twitch!", url: `https://twitch.tv/${UserData.login}` },
+            { label: "Download the Overlay", url: "https://github.com/felixfromdiscord/iriscent-chat-overlay"}
+        ]
+    }));
+
+    window.close();
+    return;
+});

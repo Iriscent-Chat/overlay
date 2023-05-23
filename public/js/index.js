@@ -71,10 +71,26 @@ async function onLoadHandler() {
                     namedElements[7].value = chatSettings.username;
                     namedElements[8].checked = chatSettings.transparentWindow;
                     namedElements[9].checked = chatSettings.topMost;
+
+                    document.getElementById("font-size-value").innerText = "Font Size: " + chatSettings.fontSize;
+
+                    namedElements[7].placeholder = UserData.display_name;
                 }
             } catch (error) {
                 console.error(error);
             }
+            
+            window.electronAPI.updateRPC(JSON.stringify({
+                details: 'In main menu...',
+                state: 'Setting up stuff...',
+                largeImageKey: 'logo',
+                largeImageText: 'v1.0.0-beta',
+                startTimestamp: Date.now(),
+                buttons: [
+                    { label: "Check out my Twitch!", url: `https://twitch.tv/${UserData.login}` },
+                    { label: "Download the Overlay", url: "https://github.com/felixfromdiscord/iriscent-chat-overlay"}
+                ]
+            }));
 
             finishLoading();
             clearInterval(dotInterval);
@@ -112,7 +128,23 @@ async function onLoadHandler() {
                 namedElements[7].value = chatSettings.username;
                 namedElements[8].checked = chatSettings.transparentWindow;
                 namedElements[9].checked = chatSettings.topMost;
+
+                document.getElementById("font-size-value").innerText = "Font Size: " + chatSettings.fontSize;
+
+                namedElements[7].placeholder = UserData.display_name;
             }
+
+            window.electronAPI.updateRPC(JSON.stringify({
+                details: 'In main menu...',
+                state: 'Setting up stuff...',
+                largeImageKey: 'logo',
+                largeImageText: 'v1.0.0-beta',
+                startTimestamp: Date.now(),
+                buttons: [
+                    { label: "Check out my Twitch!", url: `https://twitch.tv/${UserData.login}` },
+                    { label: "Download the Overlay", url: "https://github.com/felixfromdiscord/iriscent-chat-overlay"}
+                ]
+            }));
 
             finishLoading();
             clearInterval(dotInterval);
@@ -191,6 +223,18 @@ async function finishLoading() {
         window.electronAPI.launchChat(JSON.stringify(settings));
 
         localStorage.setItem("ChatSettings", JSON.stringify(settings));
+
+        window.electronAPI.updateRPC(JSON.stringify({
+            details: 'Watching chat...',
+            state: 'Reading all the funny messages...',
+            largeImageKey: 'logo',
+            largeImageText: 'v1.0.0-beta',
+            startTimestamp: Date.now(),
+            buttons: [
+                { label: "Check out my Twitch!", url: `https://twitch.tv/${UserData.login}` },
+                { label: "Download the Overlay", url: "https://github.com/felixfromdiscord/iriscent-chat-overlay"}
+            ]
+        }));
     });
 
     logoutbutton.addEventListener("click", async () => {
@@ -200,5 +244,13 @@ async function finishLoading() {
             localStorage.removeItem("UserData");
             window.electronAPI.forceQuit();
         }
+    });
+
+    document.getElementById("frameclose").addEventListener('click', (e) => {
+        window.electronAPI.exit();
+    });
+
+    document.getElementById("frameminimize").addEventListener('click', (e) => {
+        window.electronAPI.minimize();
     });
 }
