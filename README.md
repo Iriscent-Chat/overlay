@@ -37,6 +37,6 @@ nah dont even try 💀
 
 [BattlePrizrak](https://twitch.tv/battleprizrak) - helped in event support testing :)  
 [balkticu](https://twitch.tv/balkticu) - idk why this man is here dont even ask, i guess emotional support or something  
-[me](https://twitch.tv/felixfromdiscord) - i mean i created this thing btw pls follow my twitch i will stream soon i promise :(
+[me](https://twitch.tv/felixfromdiscord) - i mean i created this thing btw pls follow my twitch i will stream soon i promise :(  
 [(king)kaizen](https://twitch.tv/king_kaizen_) - emotional support :)  
-generous anon - the new logos
+generous anon - the new logos  
