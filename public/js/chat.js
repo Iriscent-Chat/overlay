@@ -7,6 +7,20 @@ class EventSub {
         this.secret;
     };
 
+    addEvent = function (eventType, func) {
+        switch (eventType) {
+            case 0: // Message
+                this.socket.events.onmessage.push(func);
+                break;
+            case 1: // Event
+                this.socket.events.onevent.push(func);
+                break;
+            default:
+                return this.socket.events;
+        }
+        return this.socket.events;
+    }
+
     open = function() {
         this.socket = new WebSocket("wss://eventsub.wss.twitch.tv/ws");
 
@@ -14,6 +28,13 @@ class EventSub {
         this.socket.onmessage = this.onmessage;
         this.socket.onclose = this.onclose;
         this.socket.onerror = this.onerror;
+
+        this.socket.events = {
+            onmessage: [],
+            onevent: []
+        };
+
+        return this;
     }
 
     close = function() {
@@ -147,6 +168,15 @@ class EventSub {
             var info = div.children[1];
             var extra = div.children[2];
 
+            try {
+                this.events.onevent.forEach((e) => {
+                    let eventData = data.payload;
+                    e(eventData);
+                });
+            } catch (e) {
+                console.error(e);
+            }
+
             switch (data.payload.subscription.type) {
                 case "channel.follow":
                     sender.innerText = data.payload.event.user_name;
@@ -261,12 +291,18 @@ function load(username, auth, settings) {
             name.style.color = userstate["color"];
     
             chat.insertBefore(clone, chat.children[0]);
+
+            try {
+                ES.socket.events.onmessage.forEach((e) => e({message: message, userstate: userstate, channel: channel, self: self}));
+            } catch (e) {
+                console.error(e);
+            }
         } else {
             console.error("Templating not supported :(")
         }
     });
 
-    ES.open();
+    window.loadPlugins(ES.open(), ChatSettings.pluginUrls);
 }
 
 async function init() {

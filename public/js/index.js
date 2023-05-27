@@ -58,26 +58,29 @@ async function onLoadHandler() {
             document.getElementById("userName").innerText = `Welcome, ${UserData["display_name"]}!`;
 
             let chatSettings = localStorage.getItem("ChatSettings");
-            try {
+            if(chatSettings != null) {
                 if(chatSettings != null) {
-                    const namedElements = document.querySelectorAll('input[name]');
-                    namedElements[0].value = chatSettings.fontColor;
-                    namedElements[1].value = chatSettings.bgColor;
-                    namedElements[2].checked = chatSettings.showBadges;
-                    namedElements[3].checked = chatSettings.emoteSources["7tv"];
-                    namedElements[4].checked = chatSettings.emoteSources["btv"];
-                    namedElements[5].checked = chatSettings.emoteSources["ffz"];
-                    namedElements[6].value = chatSettings.fontSize;
-                    namedElements[7].value = chatSettings.username;
-                    namedElements[8].checked = chatSettings.transparentWindow;
-                    namedElements[9].checked = chatSettings.topMost;
-
-                    document.getElementById("font-size-value").innerText = "Font Size: " + chatSettings.fontSize;
-
-                    namedElements[7].placeholder = UserData.display_name;
+                    try {
+                        const namedElements = document.querySelectorAll('label~*[id]');
+                        namedElements[0].value = chatSettings.fontColor;
+                        namedElements[1].value = chatSettings.bgColor;
+                        namedElements[2].checked = chatSettings.showBadges;
+                        namedElements[3].checked = chatSettings.emoteSources["7tv"];
+                        namedElements[4].checked = chatSettings.emoteSources["btv"];
+                        namedElements[5].checked = chatSettings.emoteSources["ffz"];
+                        namedElements[6].value = chatSettings.fontSize;
+                        namedElements[7].value = chatSettings.username;
+                        namedElements[8].checked = chatSettings.transparentWindow;
+                        namedElements[9].checked = chatSettings.topMost;
+                        namedElements[10].value = chatSettings.pluginUrls;
+    
+                        document.getElementById("font-size-value").innerText = "Font Size: " + chatSettings.fontSize;
+        
+                        namedElements[7].placeholder = UserData.display_name;
+                    } catch (err) {
+                        console.error(err);
+                    }
                 }
-            } catch (error) {
-                console.error(error);
             }
             
             window.electronAPI.updateRPC(JSON.stringify({
@@ -117,21 +120,26 @@ async function onLoadHandler() {
 
             let chatSettings = JSON.parse(localStorage.getItem("ChatSettings"));
             if(chatSettings != null) {
-                const namedElements = document.querySelectorAll('input[name]');
-                namedElements[0].value = chatSettings.fontColor;
-                namedElements[1].value = chatSettings.bgColor;
-                namedElements[2].checked = chatSettings.showBadges;
-                namedElements[3].checked = chatSettings.emoteSources["7tv"];
-                namedElements[4].checked = chatSettings.emoteSources["btv"];
-                namedElements[5].checked = chatSettings.emoteSources["ffz"];
-                namedElements[6].value = chatSettings.fontSize;
-                namedElements[7].value = chatSettings.username;
-                namedElements[8].checked = chatSettings.transparentWindow;
-                namedElements[9].checked = chatSettings.topMost;
+                try {
+                    const namedElements = document.querySelectorAll('label~*[id]');
+                    namedElements[0].value = chatSettings.fontColor;
+                    namedElements[1].value = chatSettings.bgColor;
+                    namedElements[2].checked = chatSettings.showBadges;
+                    namedElements[3].checked = chatSettings.emoteSources["7tv"];
+                    namedElements[4].checked = chatSettings.emoteSources["btv"];
+                    namedElements[5].checked = chatSettings.emoteSources["ffz"];
+                    namedElements[6].value = chatSettings.fontSize;
+                    namedElements[7].value = chatSettings.username;
+                    namedElements[8].checked = chatSettings.transparentWindow;
+                    namedElements[9].checked = chatSettings.topMost;
+                    namedElements[10].value = chatSettings.pluginUrls;
 
-                document.getElementById("font-size-value").innerText = "Font Size: " + chatSettings.fontSize;
-
-                namedElements[7].placeholder = UserData.display_name;
+                    document.getElementById("font-size-value").innerText = "Font Size: " + chatSettings.fontSize;
+    
+                    namedElements[7].placeholder = UserData.display_name;
+                } catch (err) {
+                    console.error(err);
+                }
             }
 
             window.electronAPI.updateRPC(JSON.stringify({
@@ -205,7 +213,7 @@ async function finishLoading() {
     });
 
     launchbutton.addEventListener("click", () => {
-        const namedElements = document.querySelectorAll('input[name]');
+        const namedElements = document.querySelectorAll('label~*[id]');
         const settings = {
             "fontColor": namedElements[0].value,
             "bgColor": namedElements[1].value,
@@ -218,11 +226,12 @@ async function finishLoading() {
             "fontSize": namedElements[6].value,
             "username": namedElements[7].value,
             "transparentWindow": namedElements[8].checked,
-            "topMost": namedElements[9].checked
+            "topMost": namedElements[9].checked,
+            "pluginUrls": namedElements[10].value
         }
-        window.electronAPI.launchChat(JSON.stringify(settings));
-
         localStorage.setItem("ChatSettings", JSON.stringify(settings));
+
+        window.electronAPI.launchChat(JSON.stringify(settings));
 
         window.electronAPI.updateRPC(JSON.stringify({
             details: 'Watching chat...',
@@ -252,5 +261,51 @@ async function finishLoading() {
 
     document.getElementById("frameminimize").addEventListener('click', (e) => {
         window.electronAPI.minimize();
+    });
+
+    function hasDuplicates(array) {
+        return (new Set(array)).size !== array.length;
+    }
+
+    document.getElementById("input-script-list").addEventListener('input', (e) => {
+        const regex = /^https:\/\/\S+\.\S{2,3}\/.+\.js|http:\/\/localhost.+\/\S+\.js\n{0,}$/;
+        var value = e.target.value;
+        var lines = value.split("\n");
+        if(hasDuplicates(lines)) {
+            e.target.style.backgroundColor = 'lightpink';
+            return console.error("Duplicates found in the addon list");
+        } else {
+            e.target.style.backgroundColor = 'palegreen';
+        }
+        lines.forEach((l, i) => {
+            if(l.length <= 1) return;
+            if(regex.test(l)) {
+                e.target.style.backgroundColor = 'palegreen';
+            } else {
+                e.target.style.backgroundColor = 'lightpink';
+                return console.error("Incorrect link format found in the addon list");
+            }
+        });
+    });
+
+    document.getElementById("input-theme-list").addEventListener('input', (e) => {
+        const regex = /^https:\/\/\S+\.\S{2,3}\/.+\.theme\.css|http:\/\/localhost.+\/\S+\.theme\.css\n{0,}$/;
+        var value = e.target.value;
+        var lines = value.split("\n");
+        if(hasDuplicates(lines)) {
+            e.target.style.backgroundColor = 'lightpink';
+            return console.error("Duplicates found in the theme list");
+        } else {
+            e.target.style.backgroundColor = 'palegreen';
+        }
+        lines.forEach((l, i) => {
+            if(l.length <= 1) return;
+            if(regex.test(l)) {
+                e.target.style.backgroundColor = 'palegreen';
+            } else {
+                e.target.style.backgroundColor = 'lightpink';
+                return console.error("Incorrect link format found in the theme list");
+            }
+        });
     });
 }
