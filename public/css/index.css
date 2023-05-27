@@ -424,15 +424,25 @@ input[type="color"]::-webkit-color-swatch:hover {
     border-right: 8px solid #aaaaaa;
 }
 
+.validate {
+    background-color: #ababab;
+    color: black;
+    font-size: 12px;
+    outline: 0;
+}
+
 input[type="text"] {
     border-radius: 24px;
     border: none;
     outline: 3px solid #ffffff;
-    background: linear-gradient(145deg, rgba(82,181,193,1) 0%, rgba(145,70,255,1) 50%, rgba(186,56,200,1) 100%);
-    color: white;
     transition: all 0.2s ease-in-out;
     padding: 6px;
     font-family: 'Space Grotesk', sans-serif;
+}
+
+input[type="text"]:not(.validate) {
+    color: white;
+    background: linear-gradient(145deg, rgba(82,181,193,1) 0%, rgba(145,70,255,1) 50%, rgba(186,56,200,1) 100%);
 }
 
 input[type="text"]:hover,
@@ -443,4 +453,3 @@ input[type="text"]:focus {
 input[type="text"]::placeholder {
     color: #ffffffaf;
 }
-
